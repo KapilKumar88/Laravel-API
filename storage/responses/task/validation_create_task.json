@@ -1,0 +1,11 @@
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "title": [
+            "The Title field is required."
+        ],
+        "description": [
+            "The Description field is required."
+        ]
+    }
+}

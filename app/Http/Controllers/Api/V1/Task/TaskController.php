@@ -4,21 +4,44 @@ namespace App\Http\Controllers\Api\V1\Task;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\TaskApiRequest;
-use App\Models\Task;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Repositories\Task\TaskRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * @group Task
+ */
 class TaskController extends Controller
 {
+
+    protected $taskRespository;
+
     /**
-     * Display a listing of the resource.
+     * Creating the instance of TaskRepository
+     */
+    public function __construct(TaskRepositoryInterface $taskRespository)
+    {
+        $this->taskRespository = $taskRespository;
+    }
+
+
+    /**
+     * Task List
+     * 
+     * This API endpoint is used to get the list of all
+     * task created by the user
+     * @responseFile status=200 scenario="On Success" responses/task/get_task.json
+     * @responseFile status=401 scenario="Unauthorized" responses/common/unauthenticated.json
+     * @responseFile status=404 scenario="Not found" responses/common/common_error.json
+     * @responseFile status=500 scenario="Internal server error" responses/common/internal_error.json
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         try {
-            $tasks = Task::where('user_id', Auth::id())->get();
+            $tasks = $this->taskRespository->get([
+                                            'user_id' => Auth::id()
+                                        ]);
             if($tasks->count() > 0){
                 return $this->sendResponse('Tasks retrived successfully', $tasks);
             }else{
@@ -34,8 +57,17 @@ class TaskController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * Create Task
+     * 
+     * This API endpoint is used to create the task 
+     * @bodyParam title string required Title of the task
+     * @bodyParam description string required Description of the task
+     * @bodyParam status string required Status of the task and the value must be one of <code>open</code>, <code>in_progress</code>, or <code>close</code>.
+     * @responseFile status=200 scenario="On Success" responses/task/create_task.json
+     * @responseFile status=401 scenario="Unauthorized" responses/common/unauthenticated.json
+     * @responseFile status=422 scenario="Validation errors" responses/task/validation_create_task.json
+     * @responseFile status=500 scenario="Internal server error" responses/common/internal_error.json
+     * 
      * @param  \App\Http\Requests\Api\V1\TaskApiRequest  $request
      * @return \Illuminate\Http\Response
      */
@@ -43,12 +75,10 @@ class TaskController extends Controller
     {
         try {
             $validatedRequest = $request->validated();
-            $task = Task::create([
-                        'user_id' => Auth::id(),
-                        'title' =>  $validatedRequest['title'],
-                        'description' =>  $validatedRequest['description'],
-                        'status'    => $validatedRequest['status'] ?? 'OPEN'
-                    ]);
+            $validatedRequest['user_id'] = Auth::id();
+            $validatedRequest['status'] = $validatedRequest['status'] ?? 'OPEN';
+            
+            $task = $this->taskRespository->create($validatedRequest);
 
             return $this->sendResponse('Task created successfully', $task, HTTP_CREATED);
         } catch (\Exception $th) {
@@ -61,21 +91,31 @@ class TaskController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
+     * Show Task
+     * 
+     * This API endpoint is used to show a particular task 
+     * of the user
+     * @urlParam task integer required The ID of the task.
+     * @responseFile status=200 scenario="On Success" responses/task/get_single_task.json
+     * @responseFile status=401 scenario="Unauthorized" responses/common/unauthenticated.json
+     * @responseFile status=404 scenario="Not found" responses/common/common_error.json { "message" : "Task does not exists"}
+     * @responseFile status=500 scenario="Internal server error" responses/common/internal_error.json
+     * 
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         try {
-            $task = Task::where('id', $id)
-                            ->where('user_id', Auth::id())
-                            ->first();
-
-            return $this->sendResponse('Task details fetched successfully', $task);
-        } catch (ModelNotFoundException $th){
-            return $this->sendError('Task does not exists');
+            $task = $this->taskRespository->first([
+                                            'id' => $id,
+                                            'user_id' => Auth::id()
+                                        ]);
+            if(isset($task)){
+                return $this->sendResponse('Task details fetched successfully', $task);
+            }else{
+                return $this->sendError('Task does not exists');
+            }
         } catch (\Exception $th) {
             return $this->sendInternalError([
                         'class'     => __CLASS__,
@@ -86,8 +126,28 @@ class TaskController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
+     * Edit/Update Task
+     * 
+     * This API endpoint update the specific task details in storage.
+     * @urlParam task integer required The ID of the task.
+     * @bodyParam title string Title of the task
+     * @bodyParam description string Description of the task
+     * @bodyParam status string required Status of the task and the value must be one of <code>open</code>, <code>in_progress</code>, or <code>close</code>.
+     * @responseFile status=200 scenario="On Success" responses/common/common_error.json { "success":true, "message" : "Task details updated successfully"}
+     * @responseFile status=401 scenario="Unauthorized" responses/common/unauthenticated.json
+     * @responseFile status=404 scenario="Not found" responses/common/common_error.json { "message" : "Task not found"}
+     * @response status=422 scenario="Validation errors" {
+     *          "message": "The given data was invalid.",
+     *          "errors": {
+     *                   "title": [
+     *                          "The Title field is required."
+     *                      ],
+     *                   "description": [
+     *                          "The Description field is required."
+     *                      ]
+     *                  }
+     *      }
+     * @responseFile status=500 scenario="Internal server error" responses/common/internal_error.json
      * @param  App\Http\Requests\Api\V1\TaskApiRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -96,21 +156,19 @@ class TaskController extends Controller
     {
         try {
             $validatedRequest = $request->validated();
-            $task = Task::where('id', $id)->where('user_id', Auth::id())->first();
+            $task = $this->taskRespository->exists([
+                                                'id' => $id,
+                                                'user_id' => Auth::id()
+                                            ]);
             
-            if(isset($task)){   
-                $task->title        = $validatedRequest['title'] ?? $task->title;
-                $task->description  = $validatedRequest['description'] ?? $task->description;
-                $task->status       = $validatedRequest['status'] ?? $task->status;
-                $task->save();
-                return $this->sendResponse('Task details updated successfully', $task);
+            if($task){   
+                $this->taskRespository->update($validatedRequest, $id);
+                return $this->sendResponse('Task details updated successfully');
             }else{
                 return $this->sendError('Task not found');
             }
 
 
-        } catch (ModelNotFoundException $th){
-            return $this->sendError('Task does not exists');
         } catch (\Exception $th) {
             return $this->sendInternalError([
                         'class'     => __CLASS__,
@@ -121,23 +179,33 @@ class TaskController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
+     * Delete Task
+     * 
+     * This API endpoint delete the task
+     * @urlParam task integer required The ID of the task.
+     * @responseFile status=200 scenario="On Success" responses/common/common_error.json { "message" : "Task deleted successfully"}
+     * @responseFile status=401 scenario="Unauthorized" responses/common/unauthenticated.json
+     * @responseFile status=404 scenario="Not found" responses/common/common_error.json { "message" : "Task not found"}
+     * @responseFile status=500 scenario="Internal server error" responses/common/internal_error.json
+     * @responseFile status=503 scenario="Service unavailable" responses/common/common_error.json { "message" : "Something went wrong please try again"}
+     * 
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         try {
-
-            $task = Task::where('id', $id)->where('user_id', Auth::id())->exists();
+            $task = $this->taskRespository->exists([
+                                        'id' => $id,
+                                        'user_id' => Auth::id()
+                                    ]);
             if($task){
-                $response = Task::where('id', $id)->where('user_id', Auth::id())->delete();
+                $response = $this->taskRespository->delete($id);
                 
                 if($response){   
                     return $this->sendResponse('Task deleted successfully');
                 }else{
-                    return $this->sendError('Something went wrong please try again', HTTP_NOT_IMPLEMENTED);
+                    return $this->sendError('Something went wrong please try again', HTTP_SERVICE_UNAVAILABLE);
                 }
             }else{
                 return $this->sendError('Task not found');

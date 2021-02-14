@@ -1,0 +1,13 @@
+{
+    "success": true,
+    "message": "Task created successfully",
+    "data": {
+        "title": "Sit",
+        "description": "I wonder what they said. The executioner's.",
+        "status": "OPEN",
+        "user_id": 20,
+        "updated_at": "2021-02-14 14:50:31",
+        "created_at": "2021-02-14 14:50:31",
+        "id": 101
+    }
+}

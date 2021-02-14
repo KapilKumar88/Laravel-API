@@ -33,7 +33,7 @@ return [
                 /*
                  * Match only routes whose paths match this pattern (use * as a wildcard to match any characters). Example: 'users/*'.
                  */
-                'prefixes' => ['*'],
+                'prefixes' => ['api/v1/*'],
 
                 /*
                  * [Dingo router only] Match only routes registered under this version. Wildcards are not supported.
@@ -130,7 +130,7 @@ return [
      * - "static" will generate a static HTMl page in the /public/docs folder,
      * - "laravel" will generate the documentation as a Blade view, so you can add routing and authentication.
      */
-    'type' => 'static',
+    'type' => 'laravel',
 
     /*
      * Settings for `static` type output.
@@ -169,7 +169,7 @@ return [
      * Add a Try It Out button to your endpoints so consumers can test endpoints right from their browser.
      * Don't forget to enable CORS headers for your endpoints.
      */
-    'interactive' => true,
+    'interactive' => false,
 
     /*
      * How is your API authenticated? This information will be used in the displayed docs, generated examples and response calls.
@@ -178,13 +178,13 @@ return [
         /*
          * Set this to true if any endpoints in your API use authentication.
          */
-        'enabled' => false,
+        'enabled' => true,
 
         /*
          * Set this to true if your API should be authenticated by default. If so, you must also set `enabled` (above) to true.
          * You can then use @unauthenticated or @authenticated on individual endpoints to change their status from the default.
          */
-        'default' => false,
+        'default' => true,
 
         /*
          * Where is the auth value meant to be sent in a request?
@@ -242,7 +242,7 @@ INTRO
     /*
      * The base URL to be used in examples. If this is empty, Scribe will use the value of config('app.url').
      */
-    'base_url' => null,
+    'base_url' => 'http://127.0.0.1:8000/',
 
     /*
      * Generate a Postman collection (v2.1.0) in addition to HTML docs.
@@ -268,7 +268,7 @@ INTRO
      * Setting `laravel.add_routes` to true (above) will also add a route for the spec.
      */
     'openapi' => [
-        'enabled' => true,
+        'enabled' => false,
 
         /*
          * Manually override some generated content in the spec. Dot notation is supported.
@@ -281,7 +281,7 @@ INTRO
     /*
      * Name for the group of endpoints which do not have a @group set.
      */
-    'default_group' => 'Endpoints',
+    'default_group' => 'Other API Endpoints',
 
     /*
      * Custom logo path. This will be used as the value of the src attribute for the <img> tag,

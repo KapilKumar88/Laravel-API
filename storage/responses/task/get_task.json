@@ -1,0 +1,51 @@
+{
+    "success": true,
+    "message": "Tasks retrived successfully",
+    "data": [
+        {
+            "id": 1,
+            "user_id": 20,
+            "title": "Sit.",
+            "description": "I wonder what they said. The executioner's.",
+            "status": "IN_PROGRESS",
+            "created_at": "2021-02-14 13:49:55",
+            "updated_at": "2021-02-14 13:49:55"
+        },
+        {
+            "id": 16,
+            "user_id": 20,
+            "title": "Maiores.",
+            "description": "March Hare. The Hatter opened his eyes very wide on hearing this.",
+            "status": "OPEN",
+            "created_at": "2021-02-14 13:49:56",
+            "updated_at": "2021-02-14 13:49:56"
+        },
+        {
+            "id": 29,
+            "user_id": 20,
+            "title": "Id.",
+            "description": "Duchess. 'Everything's got a moral, if only you can have no answers.' 'If you please.",
+            "status": "OPEN",
+            "created_at": "2021-02-14 13:49:57",
+            "updated_at": "2021-02-14 13:49:57"
+        },
+        {
+            "id": 71,
+            "user_id": 20,
+            "title": "Incidunt maiores.",
+            "description": "Queen, 'and he shall tell you my.",
+            "status": "CLOSE",
+            "created_at": "2021-02-14 13:50:00",
+            "updated_at": "2021-02-14 13:50:00"
+        },
+        {
+            "id": 96,
+            "user_id": 20,
+            "title": "Asperiores.",
+            "description": "Dormouse sulkily remarked, 'If you can't be civil, you'd better leave off,' said the youth, 'as I mentioned.",
+            "status": "IN_PROGRESS",
+            "created_at": "2021-02-14 13:50:02",
+            "updated_at": "2021-02-14 13:50:02"
+        }
+    ]
+}

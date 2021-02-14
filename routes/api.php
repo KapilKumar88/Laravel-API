@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\Task\TaskController;
+use App\Http\Controllers\Api\V1\User\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,9 +27,8 @@ Route::group(['prefix' => 'v1'], function(){
     
     Route::group(['middleware' => 'auth:sanctum'], function () {
         
-        Route::get('/user', function(Request $request){
-            return $request->user();
-        });
+        /** User Profile Route */
+        Route::get('/user', ProfileController::class);
         
         /**Task Route */
         Route::apiResource('task', TaskController::class);

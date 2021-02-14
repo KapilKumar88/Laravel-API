@@ -24,7 +24,6 @@ class TaskApiRequest extends FormRequest
      */
     public function rules()
     {
-        dd(request()->input('status'));
         if(in_array(strtolower(request()->method()), ['put', 'patch'])){
             return [
                 'title'         => 'nullable|max:255|alpha_dash',
