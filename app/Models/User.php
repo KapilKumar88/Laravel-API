@@ -48,4 +48,24 @@ class User extends Authenticatable
     public function task(){
         return $this->hasMany(Task::class, 'user_id');
     }
+
+    /**
+     * Get the created_at date
+     * @param date $value
+     * @return date 
+     */
+    public function getCreatedAtAttribute($value)
+    {
+        return ($value) ? date('Y-m-d H:i:s', strtotime($value)) : $value;
+    }
+
+    /**
+     * Get the updated_at date
+     * @param date $value
+     * @return date 
+     */
+    public function getUpdatedAtAttribute($value)
+    {
+        return ($value) ? date('Y-m-d H:i:s', strtotime($value)) : $value;
+    }
 }

@@ -20,4 +20,24 @@ class Task extends Model
         'description',
         'status'
     ];
+
+    /**
+     * Get the created_at date
+     * @param date $value
+     * @return date 
+     */
+    public function getCreatedAtAttribute($value)
+    {
+        return ($value) ? date('Y-m-d H:i:s', strtotime($value)) : $value;
+    }
+
+    /**
+     * Get the updated_at date
+     * @param date $value
+     * @return date 
+     */
+    public function getUpdatedAtAttribute($value)
+    {
+        return ($value) ? date('Y-m-d H:i:s', strtotime($value)) : $value;
+    }
 }
