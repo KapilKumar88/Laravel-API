@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\Task\TaskController;
@@ -23,7 +24,8 @@ Route::group(['prefix' => 'v1'], function(){
     Route::post('register', RegisterController::class);
     /** Login Route **/
     Route::post('login', [LoginController::class, 'login']);
-    
+    /**Password reset route */
+    Route::get('forgot-password', ForgotPasswordController::class);
     
     Route::group(['middleware' => 'auth:sanctum'], function () {
         

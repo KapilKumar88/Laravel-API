@@ -14,7 +14,7 @@ curl -X POST \
     "http://127.0.0.1:8000/api/v1/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"voluptatem","email":"jrodriguez@example.com","password":"eius"}'
+    -d '{"name":"quidem","email":"humberto03@example.net","password":"nulla"}'
 
 ```
 
@@ -29,9 +29,9 @@ let headers = {
 };
 
 let body = {
-    "name": "voluptatem",
-    "email": "jrodriguez@example.com",
-    "password": "eius"
+    "name": "quidem",
+    "email": "humberto03@example.net",
+    "password": "nulla"
 }
 
 fetch(url, {
@@ -133,7 +133,7 @@ curl -X POST \
     "http://127.0.0.1:8000/api/v1/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"harvey.brenda@example.org","password":"repudiandae"}'
+    -d '{"email":"ulind@example.com","password":"dolores"}'
 
 ```
 
@@ -148,8 +148,8 @@ let headers = {
 };
 
 let body = {
-    "email": "harvey.brenda@example.org",
-    "password": "repudiandae"
+    "email": "ulind@example.com",
+    "password": "dolores"
 }
 
 fetch(url, {
@@ -238,6 +238,83 @@ The value must be a valid email address.</p>
 <input type="text" name="password" data-endpoint="POSTapi-v1-login" data-component="body" required  hidden>
 <br>
 </p>
+
+</form>
+
+
+## Forgot Password
+
+
+This api endpoint help the user to reset password
+by sending the link to user email
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://127.0.0.1:8000/api/v1/forgot-password" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"nitzsche.rafaela@example.org"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://127.0.0.1:8000/api/v1/forgot-password"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "nitzsche.rafaela@example.org"
+}
+
+fetch(url, {
+    method: "GET",
+    headers,
+    body: JSON.stringify(body),
+}).then(response => response.json());
+```
+
+
+> Example response (422):
+
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "email": [
+            "The E-Mail Address must be a valid email address."
+        ]
+    }
+}
+```
+<div id="execution-results-GETapi-v1-forgot-password" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-v1-forgot-password"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-forgot-password"></code></pre>
+</div>
+<div id="execution-error-GETapi-v1-forgot-password" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-forgot-password"></code></pre>
+</div>
+<form id="form-GETapi-v1-forgot-password" data-method="GET" data-path="api/v1/forgot-password" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-forgot-password', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/v1/forgot-password</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="email" data-endpoint="GETapi-v1-forgot-password" data-component="body" required  hidden>
+<br>
+The value must be a valid email address.</p>
 
 </form>
 

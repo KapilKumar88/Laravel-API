@@ -152,7 +152,7 @@ curl -X POST \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"title":"necessitatibus","description":"maiores","status":"eligendi"}'
+    -d '{"title":"ut","description":"et","status":"sed"}'
 
 ```
 
@@ -168,9 +168,9 @@ let headers = {
 };
 
 let body = {
-    "title": "necessitatibus",
-    "description": "maiores",
-    "status": "eligendi"
+    "title": "ut",
+    "description": "et",
+    "status": "sed"
 }
 
 fetch(url, {
@@ -279,7 +279,7 @@ of the user
 
 ```bash
 curl -X GET \
-    -G "http://127.0.0.1:8000/api/v1/task/11" \
+    -G "http://127.0.0.1:8000/api/v1/task/17" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
@@ -287,7 +287,7 @@ curl -X GET \
 
 ```javascript
 const url = new URL(
-    "http://127.0.0.1:8000/api/v1/task/11"
+    "http://127.0.0.1:8000/api/v1/task/17"
 );
 
 let headers = {
@@ -383,17 +383,17 @@ This API endpoint update the specific task details in storage.
 
 ```bash
 curl -X PUT \
-    "http://127.0.0.1:8000/api/v1/task/14" \
+    "http://127.0.0.1:8000/api/v1/task/10" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"title":"accusamus","description":"consequatur","status":"maxime"}'
+    -d '{"title":"ut","description":"fugit","status":"cupiditate"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://127.0.0.1:8000/api/v1/task/14"
+    "http://127.0.0.1:8000/api/v1/task/10"
 );
 
 let headers = {
@@ -403,9 +403,9 @@ let headers = {
 };
 
 let body = {
-    "title": "accusamus",
-    "description": "consequatur",
-    "status": "maxime"
+    "title": "ut",
+    "description": "fugit",
+    "status": "cupiditate"
 }
 
 fetch(url, {
@@ -522,7 +522,7 @@ This API endpoint delete the task
 
 ```bash
 curl -X DELETE \
-    "http://127.0.0.1:8000/api/v1/task/11" \
+    "http://127.0.0.1:8000/api/v1/task/4" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
@@ -530,7 +530,7 @@ curl -X DELETE \
 
 ```javascript
 const url = new URL(
-    "http://127.0.0.1:8000/api/v1/task/11"
+    "http://127.0.0.1:8000/api/v1/task/4"
 );
 
 let headers = {

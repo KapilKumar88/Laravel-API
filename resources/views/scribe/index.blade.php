@@ -44,7 +44,7 @@
                             <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: February 14 2021</li>
+            <li>Last updated: February 23 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -71,7 +71,7 @@ application by entering the email, name, password</p>
     "http://127.0.0.1:8000/api/v1/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"voluptatem","email":"jrodriguez@example.com","password":"eius"}'
+    -d '{"name":"quidem","email":"humberto03@example.net","password":"nulla"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://127.0.0.1:8000/api/v1/register"
@@ -83,9 +83,9 @@ let headers = {
 };
 
 let body = {
-    "name": "voluptatem",
-    "email": "jrodriguez@example.com",
-    "password": "eius"
+    "name": "quidem",
+    "email": "humberto03@example.net",
+    "password": "nulla"
 }
 
 fetch(url, {
@@ -176,7 +176,7 @@ and password</p>
     "http://127.0.0.1:8000/api/v1/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"harvey.brenda@example.org","password":"repudiandae"}'
+    -d '{"email":"ulind@example.com","password":"dolores"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://127.0.0.1:8000/api/v1/login"
@@ -188,8 +188,8 @@ let headers = {
 };
 
 let body = {
-    "email": "harvey.brenda@example.org",
-    "password": "repudiandae"
+    "email": "ulind@example.com",
+    "password": "dolores"
 }
 
 fetch(url, {
@@ -270,6 +270,71 @@ The value must be a valid email address.</p>
 <input type="text" name="password" data-endpoint="POSTapi-v1-login" data-component="body" required  hidden>
 <br>
 </p>
+
+</form>
+<h2>Forgot Password</h2>
+<p>This api endpoint help the user to reset password
+by sending the link to user email</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://127.0.0.1:8000/api/v1/forgot-password" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"email":"nitzsche.rafaela@example.org"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/v1/forgot-password"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "nitzsche.rafaela@example.org"
+}
+
+fetch(url, {
+    method: "GET",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "The given data was invalid.",
+    "errors": {
+        "email": [
+            "The E-Mail Address must be a valid email address."
+        ]
+    }
+}</code></pre>
+<div id="execution-results-GETapi-v1-forgot-password" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-v1-forgot-password"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-forgot-password"></code></pre>
+</div>
+<div id="execution-error-GETapi-v1-forgot-password" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-forgot-password"></code></pre>
+</div>
+<form id="form-GETapi-v1-forgot-password" data-method="GET" data-path="api/v1/forgot-password" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-forgot-password', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/v1/forgot-password</code></b>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="email" data-endpoint="GETapi-v1-forgot-password" data-component="body" required  hidden>
+<br>
+The value must be a valid email address.</p>
 
 </form>
 <h2>Logout</h2>
@@ -471,7 +536,7 @@ fetch(url, {
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"title":"necessitatibus","description":"maiores","status":"eligendi"}'
+    -d '{"title":"ut","description":"et","status":"sed"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://127.0.0.1:8000/api/v1/task"
@@ -484,9 +549,9 @@ let headers = {
 };
 
 let body = {
-    "title": "necessitatibus",
-    "description": "maiores",
-    "status": "eligendi"
+    "title": "ut",
+    "description": "et",
+    "status": "sed"
 }
 
 fetch(url, {
@@ -583,12 +648,12 @@ of the user</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://127.0.0.1:8000/api/v1/task/11" \
+    -G "http://127.0.0.1:8000/api/v1/task/17" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/v1/task/11"
+    "http://127.0.0.1:8000/api/v1/task/17"
 );
 
 let headers = {
@@ -671,14 +736,14 @@ The ID of the task.</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
-    "http://127.0.0.1:8000/api/v1/task/14" \
+    "http://127.0.0.1:8000/api/v1/task/10" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"title":"accusamus","description":"consequatur","status":"maxime"}'
+    -d '{"title":"ut","description":"fugit","status":"cupiditate"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/v1/task/14"
+    "http://127.0.0.1:8000/api/v1/task/10"
 );
 
 let headers = {
@@ -688,9 +753,9 @@ let headers = {
 };
 
 let body = {
-    "title": "accusamus",
-    "description": "consequatur",
-    "status": "maxime"
+    "title": "ut",
+    "description": "fugit",
+    "status": "cupiditate"
 }
 
 fetch(url, {
@@ -794,12 +859,12 @@ Status of the task and the value must be one of <code>open</code>, <code>in_prog
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
-    "http://127.0.0.1:8000/api/v1/task/11" \
+    "http://127.0.0.1:8000/api/v1/task/4" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/v1/task/11"
+    "http://127.0.0.1:8000/api/v1/task/4"
 );
 
 let headers = {
