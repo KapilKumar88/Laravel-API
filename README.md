@@ -1,6 +1,6 @@
 ## Laravel + Sanctum
 
-It is demo project for demonstrating the RESTfull api with laravel and sanctum and user scribe to create the api documentaion.
+It is demo project for demonstrating the RESTfull api with laravel and sanctum and use scribe to create the api documentaion.
 
 ## How to use
 
