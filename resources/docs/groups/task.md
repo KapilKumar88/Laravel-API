@@ -152,7 +152,7 @@ curl -X POST \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"title":"ut","description":"et","status":"sed"}'
+    -d '{"title":"qui","description":"porro","status":"veritatis"}'
 
 ```
 
@@ -168,9 +168,9 @@ let headers = {
 };
 
 let body = {
-    "title": "ut",
-    "description": "et",
-    "status": "sed"
+    "title": "qui",
+    "description": "porro",
+    "status": "veritatis"
 }
 
 fetch(url, {
@@ -383,17 +383,17 @@ This API endpoint update the specific task details in storage.
 
 ```bash
 curl -X PUT \
-    "http://127.0.0.1:8000/api/v1/task/10" \
+    "http://127.0.0.1:8000/api/v1/task/3" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"title":"ut","description":"fugit","status":"cupiditate"}'
+    -d '{"title":"quis","description":"sit","status":"sint"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://127.0.0.1:8000/api/v1/task/10"
+    "http://127.0.0.1:8000/api/v1/task/3"
 );
 
 let headers = {
@@ -403,9 +403,9 @@ let headers = {
 };
 
 let body = {
-    "title": "ut",
-    "description": "fugit",
-    "status": "cupiditate"
+    "title": "quis",
+    "description": "sit",
+    "status": "sint"
 }
 
 fetch(url, {
@@ -416,21 +416,6 @@ fetch(url, {
 ```
 
 
-> Example response (422, Validation errors):
-
-```json
-{
-    "message": "The given data was invalid.",
-    "errors": {
-        "title": [
-            "The Title field is required."
-        ],
-        "description": [
-            "The Description field is required."
-        ]
-    }
-}
-```
 > Example response (200, On Success):
 
 ```json
@@ -452,6 +437,21 @@ fetch(url, {
 {
     "success": false,
     "message": "Task not found"
+}
+```
+> Example response (422, Validation errors):
+
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "title": [
+            "The Title field is required."
+        ],
+        "description": [
+            "The Description field is required."
+        ]
+    }
 }
 ```
 > Example response (500, Internal server error):
@@ -522,7 +522,7 @@ This API endpoint delete the task
 
 ```bash
 curl -X DELETE \
-    "http://127.0.0.1:8000/api/v1/task/4" \
+    "http://127.0.0.1:8000/api/v1/task/19" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
@@ -530,7 +530,7 @@ curl -X DELETE \
 
 ```javascript
 const url = new URL(
-    "http://127.0.0.1:8000/api/v1/task/4"
+    "http://127.0.0.1:8000/api/v1/task/19"
 );
 
 let headers = {
@@ -551,7 +551,7 @@ fetch(url, {
 
 ```json
 {
-    "success": false,
+    "success": true,
     "message": "Task deleted successfully"
 }
 ```

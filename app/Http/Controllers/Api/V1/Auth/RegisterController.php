@@ -18,9 +18,9 @@ class RegisterController extends Controller
      * This endpoint helps you to register the user in the
      * application by entering the email, name, password 
      * @unauthenticated
-     * @responseFile status=201 scenario="On success" responses/auth/register_success.json
-     * @responseFile status=422 scenario="Validation error" responses/auth/register_validation_res.json
-     * @responseFile status=500 scenario="Internal server error" responses/common/internal_error.json
+     * @responseFile status=201 scenario="On success" responses/auth/register/success.json
+     * @responseFile status=422 scenario="Validation error" responses/auth/register/validation-error.json
+     * @responseFile status=500 scenario="Internal server error" responses/common/internal-server-error.json
      * 
      * @param  \App\Http\Requests\Api\V1\RegisterApiRequest  $request
      * @return \Illuminate\Http\Response

@@ -17,6 +17,9 @@ class ForgotPasswordController extends Controller
      * 
      * This api endpoint help the user to reset password
      * by sending the link to user email
+     * @responseFile status=200 scenario="Success" responses/auth/forgot-password/success.json
+     * @responseFile status=422 scenario="Validation error" responses/auth/forgot-password/validation-error.json
+     * @responseFile status=500 scenario="Internal server error" responses/common/internal-server-error.json
      * @unauthenticated
      *
      * @param App\Http\Requests\Api\V1\ForgotPasswordRequest $request
@@ -36,7 +39,7 @@ class ForgotPasswordController extends Controller
                 } else if($status === Password::RESET_THROTTLED){
                     return $this->sendError('Too many request. '.__($status), HTTP_TOO_MANY_REQUESTS);
                 }else{
-                    return $this->sendError('Something went wrong please try again', HTTP_SERVICE_UNAVAILABLE);
+                    return $this->sendError(__($status));
                 }
 
             }else{

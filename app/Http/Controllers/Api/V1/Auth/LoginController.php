@@ -18,11 +18,11 @@ class LoginController extends Controller
      * This api endpoint help Login user to application by entering the email
      * and password
      * @unauthenticated
-     * @responseFile status=200 scenario="On success" responses/auth/login_success.json
-     * @responseFile status=422 scenario="Validation error" responses/auth/login_validation.json
-     * @responseFile status=401 scenario="Unauthorized" responses/auth/login_credential_not_match.json
-     * @responseFile status=404 scenario="Not found" responses/auth/login_not_exists.json
-     * @responseFile status=500 scenario="Internal server error" responses/common/internal_error.json
+     * @responseFile status=200 scenario="On success" responses/auth/login/success.json
+     * @responseFile status=422 scenario="Validation error" responses/auth/login/validation.json
+     * @responseFile status=401 scenario="Unauthorized" responses/auth/login/unauthorized.json
+     * @responseFile status=404 scenario="Not found" responses/auth/login/not-found.json
+     * @responseFile status=500 scenario="Internal server error" responses/common/internal-server-error.json
      * 
      * @param  App\Http\Requests\Api\V1\LoginApiRequest  $request
      * @return \Illuminate\Http\Response
@@ -63,9 +63,9 @@ class LoginController extends Controller
      * }
      * @response status=503 scenario="Service Unavailable" {
      *      "success": false,
-     *      "message": "Something went wrong plrase try again."
+     *      "message": "Something went wrong please try again."
      * }
-     * @responseFile status=500 scenario="Internal server error" responses/common/internal_error.json
+     * @responseFile status=500 scenario="Internal server error" responses/common/internal-server-error.json
      * 
      * @return \Illuminate\Http\Response
      */

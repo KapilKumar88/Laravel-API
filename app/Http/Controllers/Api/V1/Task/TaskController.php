@@ -29,10 +29,10 @@ class TaskController extends Controller
      * 
      * This API endpoint is used to get the list of all
      * task created by the user
-     * @responseFile status=200 scenario="On Success" responses/task/get_task.json
+     * @responseFile status=200 scenario="On Success" responses/task/get-tasks.json
      * @responseFile status=401 scenario="Unauthorized" responses/common/unauthenticated.json
-     * @responseFile status=404 scenario="Not found" responses/common/common_error.json
-     * @responseFile status=500 scenario="Internal server error" responses/common/internal_error.json
+     * @responseFile status=404 scenario="Not found" responses/common/error.json
+     * @responseFile status=500 scenario="Internal server error" responses/common/internal-server-error.json
      *
      * @return \Illuminate\Http\Response
      */
@@ -63,10 +63,10 @@ class TaskController extends Controller
      * @bodyParam title string required Title of the task
      * @bodyParam description string required Description of the task
      * @bodyParam status string required Status of the task and the value must be one of <code>open</code>, <code>in_progress</code>, or <code>close</code>.
-     * @responseFile status=200 scenario="On Success" responses/task/create_task.json
+     * @responseFile status=200 scenario="On Success" responses/task/create-task.json
      * @responseFile status=401 scenario="Unauthorized" responses/common/unauthenticated.json
-     * @responseFile status=422 scenario="Validation errors" responses/task/validation_create_task.json
-     * @responseFile status=500 scenario="Internal server error" responses/common/internal_error.json
+     * @responseFile status=422 scenario="Validation errors" responses/task/validation-error.json
+     * @responseFile status=500 scenario="Internal server error" responses/common/internal-server-error.json
      * 
      * @param  \App\Http\Requests\Api\V1\TaskApiRequest  $request
      * @return \Illuminate\Http\Response
@@ -96,10 +96,10 @@ class TaskController extends Controller
      * This API endpoint is used to show a particular task 
      * of the user
      * @urlParam task integer required The ID of the task.
-     * @responseFile status=200 scenario="On Success" responses/task/get_single_task.json
+     * @responseFile status=200 scenario="On Success" responses/task/get-task.json
      * @responseFile status=401 scenario="Unauthorized" responses/common/unauthenticated.json
-     * @responseFile status=404 scenario="Not found" responses/common/common_error.json { "message" : "Task does not exists"}
-     * @responseFile status=500 scenario="Internal server error" responses/common/internal_error.json
+     * @responseFile status=404 scenario="Not found" responses/common/error.json { "message" : "Task does not exists"}
+     * @responseFile status=500 scenario="Internal server error" responses/common/internal-server-error.json
      * 
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -133,21 +133,12 @@ class TaskController extends Controller
      * @bodyParam title string Title of the task
      * @bodyParam description string Description of the task
      * @bodyParam status string required Status of the task and the value must be one of <code>open</code>, <code>in_progress</code>, or <code>close</code>.
-     * @responseFile status=200 scenario="On Success" responses/common/common_error.json { "success":true, "message" : "Task details updated successfully"}
+     * 
+     * @responseFile status=200 scenario="On Success" responses/common/success.json { "message" : "Task details updated successfully"}
      * @responseFile status=401 scenario="Unauthorized" responses/common/unauthenticated.json
-     * @responseFile status=404 scenario="Not found" responses/common/common_error.json { "message" : "Task not found"}
-     * @response status=422 scenario="Validation errors" {
-     *          "message": "The given data was invalid.",
-     *          "errors": {
-     *                   "title": [
-     *                          "The Title field is required."
-     *                      ],
-     *                   "description": [
-     *                          "The Description field is required."
-     *                      ]
-     *                  }
-     *      }
-     * @responseFile status=500 scenario="Internal server error" responses/common/internal_error.json
+     * @responseFile status=404 scenario="Not found" responses/common/error.json { "message" : "Task not found"}
+     * @responseFile status=422 scenario="Validation errors" responses/task/validation-error.json
+     * @responseFile status=500 scenario="Internal server error" responses/common/internal-server-error.json
      * @param  App\Http\Requests\Api\V1\TaskApiRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -183,11 +174,11 @@ class TaskController extends Controller
      * 
      * This API endpoint delete the task
      * @urlParam task integer required The ID of the task.
-     * @responseFile status=200 scenario="On Success" responses/common/common_error.json { "message" : "Task deleted successfully"}
+     * @responseFile status=200 scenario="On Success" responses/common/success.json { "message" : "Task deleted successfully"}
      * @responseFile status=401 scenario="Unauthorized" responses/common/unauthenticated.json
-     * @responseFile status=404 scenario="Not found" responses/common/common_error.json { "message" : "Task not found"}
-     * @responseFile status=500 scenario="Internal server error" responses/common/internal_error.json
-     * @responseFile status=503 scenario="Service unavailable" responses/common/common_error.json { "message" : "Something went wrong please try again"}
+     * @responseFile status=404 scenario="Not found" responses/common/error.json { "message" : "Task not found"}
+     * @responseFile status=500 scenario="Internal server error" responses/common/internal-server-error.json
+     * @responseFile status=503 scenario="Service unavailable" responses/common/error.json { "message" : "Something went wrong please try again"}
      * 
      * @param  int  $id
      * @return \Illuminate\Http\Response

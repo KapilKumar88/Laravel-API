@@ -44,7 +44,7 @@
                             <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: February 23 2021</li>
+            <li>Last updated: February 24 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -58,7 +58,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <p>Base URL</p>
 </blockquote>
 <pre><code class="language-yaml">http://127.0.0.1:8000/</code></pre><h1>Authenticating requests</h1>
-<p>This API is authenticated by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
+<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.</p><h1>Authentication</h1>
 <h2>Register</h2>
@@ -71,7 +71,7 @@ application by entering the email, name, password</p>
     "http://127.0.0.1:8000/api/v1/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"quidem","email":"humberto03@example.net","password":"nulla"}'
+    -d '{"name":"voluptatibus","email":"xtrantow@example.org","password":"eum"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://127.0.0.1:8000/api/v1/register"
@@ -83,9 +83,9 @@ let headers = {
 };
 
 let body = {
-    "name": "quidem",
-    "email": "humberto03@example.net",
-    "password": "nulla"
+    "name": "voluptatibus",
+    "email": "xtrantow@example.org",
+    "password": "eum"
 }
 
 fetch(url, {
@@ -176,7 +176,7 @@ and password</p>
     "http://127.0.0.1:8000/api/v1/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"ulind@example.com","password":"dolores"}'
+    -d '{"email":"carroll.angelina@example.net","password":"laboriosam"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://127.0.0.1:8000/api/v1/login"
@@ -188,8 +188,8 @@ let headers = {
 };
 
 let body = {
-    "email": "ulind@example.com",
-    "password": "dolores"
+    "email": "carroll.angelina@example.net",
+    "password": "laboriosam"
 }
 
 fetch(url, {
@@ -282,7 +282,7 @@ by sending the link to user email</p>
     -G "http://127.0.0.1:8000/api/v1/forgot-password" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"nitzsche.rafaela@example.org"}'
+    -d '{"email":"bret40@example.org"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://127.0.0.1:8000/api/v1/forgot-password"
@@ -294,7 +294,7 @@ let headers = {
 };
 
 let body = {
-    "email": "nitzsche.rafaela@example.org"
+    "email": "bret40@example.org"
 }
 
 fetch(url, {
@@ -303,15 +303,30 @@ fetch(url, {
     body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre>
 <blockquote>
-<p>Example response (422):</p>
+<p>Example response (200, Success):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "success": true,
+    "message": "We have emailed your password reset link!"
+}</code></pre>
+<blockquote>
+<p>Example response (422, Validation error):</p>
 </blockquote>
 <pre><code class="language-json">{
     "message": "The given data was invalid.",
     "errors": {
         "email": [
-            "The E-Mail Address must be a valid email address."
+            "The E-Mail Address field is required."
         ]
     }
+}</code></pre>
+<blockquote>
+<p>Example response (500, Internal server error):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "success": false,
+    "message": "Internal server error.",
+    "error_id": "7c4a15e1-7b8a-4556-a1f4-e8fa7fed71d2"
 }</code></pre>
 <div id="execution-results-GETapi-v1-forgot-password" hidden>
     <blockquote>Received response<span id="execution-response-status-GETapi-v1-forgot-password"></span>:</blockquote>
@@ -374,7 +389,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-json">{
     "success": false,
-    "message": "Something went wrong plrase try again."
+    "message": "Something went wrong please try again."
 }</code></pre>
 <blockquote>
 <p>Example response (500, Internal server error):</p>
@@ -536,7 +551,7 @@ fetch(url, {
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"title":"ut","description":"et","status":"sed"}'
+    -d '{"title":"qui","description":"porro","status":"veritatis"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://127.0.0.1:8000/api/v1/task"
@@ -549,9 +564,9 @@ let headers = {
 };
 
 let body = {
-    "title": "ut",
-    "description": "et",
-    "status": "sed"
+    "title": "qui",
+    "description": "porro",
+    "status": "veritatis"
 }
 
 fetch(url, {
@@ -736,14 +751,14 @@ The ID of the task.</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
-    "http://127.0.0.1:8000/api/v1/task/10" \
+    "http://127.0.0.1:8000/api/v1/task/3" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"title":"ut","description":"fugit","status":"cupiditate"}'
+    -d '{"title":"quis","description":"sit","status":"sint"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/v1/task/10"
+    "http://127.0.0.1:8000/api/v1/task/3"
 );
 
 let headers = {
@@ -753,9 +768,9 @@ let headers = {
 };
 
 let body = {
-    "title": "ut",
-    "description": "fugit",
-    "status": "cupiditate"
+    "title": "quis",
+    "description": "sit",
+    "status": "sint"
 }
 
 fetch(url, {
@@ -763,20 +778,6 @@ fetch(url, {
     headers,
     body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre>
-<blockquote>
-<p>Example response (422, Validation errors):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "message": "The given data was invalid.",
-    "errors": {
-        "title": [
-            "The Title field is required."
-        ],
-        "description": [
-            "The Description field is required."
-        ]
-    }
-}</code></pre>
 <blockquote>
 <p>Example response (200, On Success):</p>
 </blockquote>
@@ -796,6 +797,20 @@ fetch(url, {
 <pre><code class="language-json">{
     "success": false,
     "message": "Task not found"
+}</code></pre>
+<blockquote>
+<p>Example response (422, Validation errors):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "The given data was invalid.",
+    "errors": {
+        "title": [
+            "The Title field is required."
+        ],
+        "description": [
+            "The Description field is required."
+        ]
+    }
 }</code></pre>
 <blockquote>
 <p>Example response (500, Internal server error):</p>
@@ -859,12 +874,12 @@ Status of the task and the value must be one of <code>open</code>, <code>in_prog
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
-    "http://127.0.0.1:8000/api/v1/task/4" \
+    "http://127.0.0.1:8000/api/v1/task/19" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/v1/task/4"
+    "http://127.0.0.1:8000/api/v1/task/19"
 );
 
 let headers = {
@@ -881,7 +896,7 @@ fetch(url, {
 <p>Example response (200, On Success):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "success": false,
+    "success": true,
     "message": "Task deleted successfully"
 }</code></pre>
 <blockquote>
