@@ -14,7 +14,7 @@ curl -X POST \
     "http://127.0.0.1:8000/api/v1/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"voluptatibus","email":"xtrantow@example.org","password":"eum"}'
+    -d '{"name":"dicta","email":"ryleigh.bartell@example.net","password":"sit"}'
 
 ```
 
@@ -29,9 +29,9 @@ let headers = {
 };
 
 let body = {
-    "name": "voluptatibus",
-    "email": "xtrantow@example.org",
-    "password": "eum"
+    "name": "dicta",
+    "email": "ryleigh.bartell@example.net",
+    "password": "sit"
 }
 
 fetch(url, {
@@ -133,7 +133,7 @@ curl -X POST \
     "http://127.0.0.1:8000/api/v1/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"carroll.angelina@example.net","password":"laboriosam"}'
+    -d '{"email":"armando.fadel@example.com","password":"nam"}'
 
 ```
 
@@ -148,8 +148,8 @@ let headers = {
 };
 
 let body = {
-    "email": "carroll.angelina@example.net",
-    "password": "laboriosam"
+    "email": "armando.fadel@example.com",
+    "password": "nam"
 }
 
 fetch(url, {
@@ -255,7 +255,7 @@ curl -X GET \
     -G "http://127.0.0.1:8000/api/v1/forgot-password" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"bret40@example.org"}'
+    -d '{"email":"stacy80@example.net"}'
 
 ```
 
@@ -270,7 +270,7 @@ let headers = {
 };
 
 let body = {
-    "email": "bret40@example.org"
+    "email": "stacy80@example.net"
 }
 
 fetch(url, {

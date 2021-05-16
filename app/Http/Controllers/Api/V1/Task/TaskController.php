@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api\V1\Task;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\TaskApiRequest;
+use App\Models\Task;
 use App\Repositories\Task\TaskRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @group Task
@@ -63,6 +65,7 @@ class TaskController extends Controller
      * @bodyParam title string required Title of the task
      * @bodyParam description string required Description of the task
      * @bodyParam status string required Status of the task and the value must be one of <code>open</code>, <code>in_progress</code>, or <code>close</code>.
+     * @bodyParam files array Files array to be upload
      * @responseFile status=200 scenario="On Success" responses/task/create-task.json
      * @responseFile status=401 scenario="Unauthorized" responses/common/unauthenticated.json
      * @responseFile status=422 scenario="Validation errors" responses/task/validation-error.json
@@ -79,6 +82,10 @@ class TaskController extends Controller
             $validatedRequest['status'] = $validatedRequest['status'] ?? 'OPEN';
             
             $task = $this->taskRespository->create($validatedRequest);
+
+            if(!empty($validatedRequest['files'])){
+                $this->uploadTaskFiles($task, $validatedRequest['files']);
+            }            
 
             return $this->sendResponse('Task created successfully', $task, HTTP_CREATED);
         } catch (\Exception $th) {
@@ -133,7 +140,7 @@ class TaskController extends Controller
      * @bodyParam title string Title of the task
      * @bodyParam description string Description of the task
      * @bodyParam status string required Status of the task and the value must be one of <code>open</code>, <code>in_progress</code>, or <code>close</code>.
-     * 
+     * @bodyParam files array Files array to be upload
      * @responseFile status=200 scenario="On Success" responses/common/success.json { "message" : "Task details updated successfully"}
      * @responseFile status=401 scenario="Unauthorized" responses/common/unauthenticated.json
      * @responseFile status=404 scenario="Not found" responses/common/error.json { "message" : "Task not found"}
@@ -147,13 +154,15 @@ class TaskController extends Controller
     {
         try {
             $validatedRequest = $request->validated();
-            $task = $this->taskRespository->exists([
+            $task = $this->taskRespository->first([
                                                 'id' => $id,
                                                 'user_id' => Auth::id()
                                             ]);
-            
-            if($task){   
+            if(!empty($task)){   
                 $this->taskRespository->update($validatedRequest, $id);
+                if(!empty($validatedRequest['files'])){
+                    $this->uploadTaskFiles($task, $validatedRequest['files']);
+                }
                 return $this->sendResponse('Task details updated successfully');
             }else{
                 return $this->sendError('Task not found');
@@ -209,5 +218,31 @@ class TaskController extends Controller
                         'message'   => $th->getMessage()
                     ]);
         }
+    }
+
+
+    /**
+     * store the files to db
+     * @param App\Models\Task $task
+     * @param array $files
+     * 
+     * @return void
+     */
+    private function uploadTaskFiles(Task $task, $files){
+        foreach ($files as $key => $value) {
+
+            $path = Storage::disk(UPLOAD_DISK)->putFile("task-{$task->id}", $value);
+
+            $task->media()->create([
+                'file_name' => explode('/', $path)[1],
+                'original_file_name' => $value->getClientOriginalName(),
+                'mime_type' => $value->getMimeType(),
+                'size' => $value->getSize(),
+                'extension' => $value->getClientOriginalExtension(),
+                'path' => $path
+            ]);
+        }
+
+        return;
     }
 }

@@ -40,11 +40,10 @@
 
             <ul class="toc-footer" id="toc-footer">
                             <li><a href="{{ route("scribe.postman") }}">View Postman collection</a></li>
-                            <li><a href="{{ route("scribe.openapi") }}">View OpenAPI (Swagger) spec</a></li>
                             <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: February 24 2021</li>
+            <li>Last updated: May 16 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -58,7 +57,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <p>Base URL</p>
 </blockquote>
 <pre><code class="language-yaml">http://127.0.0.1:8000/</code></pre><h1>Authenticating requests</h1>
-<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
+<p>Authenticate requests to this API's endpoints by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.</p><h1>Authentication</h1>
 <h2>Register</h2>
@@ -71,7 +70,7 @@ application by entering the email, name, password</p>
     "http://127.0.0.1:8000/api/v1/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"voluptatibus","email":"xtrantow@example.org","password":"eum"}'
+    -d '{"name":"dicta","email":"ryleigh.bartell@example.net","password":"sit"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://127.0.0.1:8000/api/v1/register"
@@ -83,9 +82,9 @@ let headers = {
 };
 
 let body = {
-    "name": "voluptatibus",
-    "email": "xtrantow@example.org",
-    "password": "eum"
+    "name": "dicta",
+    "email": "ryleigh.bartell@example.net",
+    "password": "sit"
 }
 
 fetch(url, {
@@ -176,7 +175,7 @@ and password</p>
     "http://127.0.0.1:8000/api/v1/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"carroll.angelina@example.net","password":"laboriosam"}'
+    -d '{"email":"armando.fadel@example.com","password":"nam"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://127.0.0.1:8000/api/v1/login"
@@ -188,8 +187,8 @@ let headers = {
 };
 
 let body = {
-    "email": "carroll.angelina@example.net",
-    "password": "laboriosam"
+    "email": "armando.fadel@example.com",
+    "password": "nam"
 }
 
 fetch(url, {
@@ -282,7 +281,7 @@ by sending the link to user email</p>
     -G "http://127.0.0.1:8000/api/v1/forgot-password" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"bret40@example.org"}'
+    -d '{"email":"stacy80@example.net"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://127.0.0.1:8000/api/v1/forgot-password"
@@ -294,7 +293,7 @@ let headers = {
 };
 
 let body = {
-    "email": "bret40@example.org"
+    "email": "stacy80@example.net"
 }
 
 fetch(url, {
@@ -459,7 +458,12 @@ fetch(url, {
             "description": "I wonder what they said. The executioner's.",
             "status": "IN_PROGRESS",
             "created_at": "2021-02-14 13:49:55",
-            "updated_at": "2021-02-14 13:49:55"
+            "updated_at": "2021-02-14 13:49:55",
+            "file_url": [
+                "http:\/\/laravel-api.test\/storage\/task-1\/XRoN2PApVqoYzgkqAeIyhUAIWW2kL2z8UDtPT1K1.png",
+                "http:\/\/laravel-api.test\/storage\/task-1\/Fbq2eRBCts2Z1UZ6SpxqV4OF9fccuRuVz6Zg2tST.png",
+                "http:\/\/laravel-api.test\/storage\/task-1\/i3stjCwXnrW76mPRCnvmPVdkfNZ69OyBXRkAWVQ2.csv"
+            ]
         },
         {
             "id": 16,
@@ -468,7 +472,8 @@ fetch(url, {
             "description": "March Hare. The Hatter opened his eyes very wide on hearing this.",
             "status": "OPEN",
             "created_at": "2021-02-14 13:49:56",
-            "updated_at": "2021-02-14 13:49:56"
+            "updated_at": "2021-02-14 13:49:56",
+            "file_url": []
         },
         {
             "id": 29,
@@ -477,7 +482,8 @@ fetch(url, {
             "description": "Duchess. 'Everything's got a moral, if only you can have no answers.' 'If you please.",
             "status": "OPEN",
             "created_at": "2021-02-14 13:49:57",
-            "updated_at": "2021-02-14 13:49:57"
+            "updated_at": "2021-02-14 13:49:57",
+            "file_url": []
         },
         {
             "id": 71,
@@ -486,7 +492,8 @@ fetch(url, {
             "description": "Queen, 'and he shall tell you my.",
             "status": "CLOSE",
             "created_at": "2021-02-14 13:50:00",
-            "updated_at": "2021-02-14 13:50:00"
+            "updated_at": "2021-02-14 13:50:00",
+            "file_url": []
         },
         {
             "id": 96,
@@ -495,7 +502,8 @@ fetch(url, {
             "description": "Dormouse sulkily remarked, 'If you can't be civil, you'd better leave off,' said the youth, 'as I mentioned.",
             "status": "IN_PROGRESS",
             "created_at": "2021-02-14 13:50:02",
-            "updated_at": "2021-02-14 13:50:02"
+            "updated_at": "2021-02-14 13:50:02",
+            "file_url": []
         }
     ]
 }</code></pre>
@@ -551,7 +559,7 @@ fetch(url, {
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"title":"qui","description":"porro","status":"veritatis"}'
+    -d '{"title":"quod","description":"aliquam","status":"aperiam","files":"molestiae"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://127.0.0.1:8000/api/v1/task"
@@ -564,9 +572,10 @@ let headers = {
 };
 
 let body = {
-    "title": "qui",
-    "description": "porro",
-    "status": "veritatis"
+    "title": "quod",
+    "description": "aliquam",
+    "status": "aperiam",
+    "files": "molestiae"
 }
 
 fetch(url, {
@@ -581,13 +590,18 @@ fetch(url, {
     "success": true,
     "message": "Task created successfully",
     "data": {
-        "title": "Sit",
-        "description": "I wonder what they said. The executioner's.",
-        "status": "OPEN",
-        "user_id": 20,
-        "updated_at": "2021-02-14 14:50:31",
-        "created_at": "2021-02-14 14:50:31",
-        "id": 101
+        "title": "veritatis",
+        "description": "qui",
+        "status": "open",
+        "user_id": 21,
+        "updated_at": "2021-05-16 11:46:55",
+        "created_at": "2021-05-16 11:46:55",
+        "id": 116,
+        "file_url": [
+            "http:\/\/laravel-api.test\/storage\/task-116\/XRoN2PApVqoYzgkqAeIyhUAIWW2kL2z8UDtPT1K1.png",
+            "http:\/\/laravel-api.test\/storage\/task-116\/Fbq2eRBCts2Z1UZ6SpxqV4OF9fccuRuVz6Zg2tST.png",
+            "http:\/\/laravel-api.test\/storage\/task-116\/i3stjCwXnrW76mPRCnvmPVdkfNZ69OyBXRkAWVQ2.csv"
+        ]
     }
 }</code></pre>
 <blockquote>
@@ -653,6 +667,11 @@ Description of the task</p>
 <input type="text" name="status" data-endpoint="POSTapi-v1-task" data-component="body" required  hidden>
 <br>
 Status of the task and the value must be one of <code>open</code>, <code>in_progress</code>, or <code>close</code>.</p>
+<p>
+<b><code>files</code></b>&nbsp;&nbsp;<small>array</small>     <i>optional</i> &nbsp;
+<input type="text" name="files" data-endpoint="POSTapi-v1-task" data-component="body"  hidden>
+<br>
+Files array to be upload</p>
 
 </form>
 <h2>Show Task</h2>
@@ -663,12 +682,12 @@ of the user</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://127.0.0.1:8000/api/v1/task/17" \
+    -G "http://127.0.0.1:8000/api/v1/task/2" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/v1/task/17"
+    "http://127.0.0.1:8000/api/v1/task/2"
 );
 
 let headers = {
@@ -694,7 +713,8 @@ fetch(url, {
         "description": "Dormouse sulkily remarked, 'If you can't be civil, you'd better leave off,' said the youth, 'as I mentioned.",
         "status": "IN_PROGRESS",
         "created_at": "2021-02-14 13:50:02",
-        "updated_at": "2021-02-14 13:50:02"
+        "updated_at": "2021-02-14 13:50:02",
+        "file_url": []
     }
 }</code></pre>
 <blockquote>
@@ -751,14 +771,14 @@ The ID of the task.</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
-    "http://127.0.0.1:8000/api/v1/task/3" \
+    "http://127.0.0.1:8000/api/v1/task/1" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"title":"quis","description":"sit","status":"sint"}'
+    -d '{"title":"corporis","description":"facilis","status":"molestiae","files":"explicabo"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/v1/task/3"
+    "http://127.0.0.1:8000/api/v1/task/1"
 );
 
 let headers = {
@@ -768,9 +788,10 @@ let headers = {
 };
 
 let body = {
-    "title": "quis",
-    "description": "sit",
-    "status": "sint"
+    "title": "corporis",
+    "description": "facilis",
+    "status": "molestiae",
+    "files": "explicabo"
 }
 
 fetch(url, {
@@ -865,6 +886,11 @@ Description of the task</p>
 <input type="text" name="status" data-endpoint="PUTapi-v1-task--task-" data-component="body" required  hidden>
 <br>
 Status of the task and the value must be one of <code>open</code>, <code>in_progress</code>, or <code>close</code>.</p>
+<p>
+<b><code>files</code></b>&nbsp;&nbsp;<small>array</small>     <i>optional</i> &nbsp;
+<input type="text" name="files" data-endpoint="PUTapi-v1-task--task-" data-component="body"  hidden>
+<br>
+Files array to be upload</p>
 
 </form>
 <h2>Delete Task</h2>
@@ -874,12 +900,12 @@ Status of the task and the value must be one of <code>open</code>, <code>in_prog
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
-    "http://127.0.0.1:8000/api/v1/task/19" \
+    "http://127.0.0.1:8000/api/v1/task/20" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/v1/task/19"
+    "http://127.0.0.1:8000/api/v1/task/20"
 );
 
 let headers = {

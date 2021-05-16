@@ -28,13 +28,17 @@ class TaskApiRequest extends FormRequest
             return [
                 'title'         => 'nullable|max:255|alpha_dash',
                 'description'   => 'nullable|max:255|string',
-                'status'        => ['required', Rule::in(['open', 'in_progress', 'close'])]
+                'status'        => ['required', Rule::in(['open', 'in_progress', 'close'])],
+                'files'          => 'nullable|array|max:5',
+                'files.*'        => 'nullable|file|mimes:jpg,jpeg,png,gif,pdf,doc,docx,csv,xls,xlsx,txt',
             ];
         }else{
             return [
                 'title'         => 'required|max:255|alpha_dash',
                 'description'   => 'required|max:255|string',
-                'status'        => ['nullable', Rule::in(['open', 'in_progress', 'close'])]
+                'status'        => ['nullable', Rule::in(['open', 'in_progress', 'close'])],
+                'files'          => 'nullable|array|max:5',
+                'files.*'        => 'nullable|file|mimes:jpg,jpeg,png,gif,pdf,doc,docx,csv,xls,xlsx,txt',
             ];
         }
     }

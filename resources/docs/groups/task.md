@@ -51,7 +51,12 @@ fetch(url, {
             "description": "I wonder what they said. The executioner's.",
             "status": "IN_PROGRESS",
             "created_at": "2021-02-14 13:49:55",
-            "updated_at": "2021-02-14 13:49:55"
+            "updated_at": "2021-02-14 13:49:55",
+            "file_url": [
+                "http:\/\/laravel-api.test\/storage\/task-1\/XRoN2PApVqoYzgkqAeIyhUAIWW2kL2z8UDtPT1K1.png",
+                "http:\/\/laravel-api.test\/storage\/task-1\/Fbq2eRBCts2Z1UZ6SpxqV4OF9fccuRuVz6Zg2tST.png",
+                "http:\/\/laravel-api.test\/storage\/task-1\/i3stjCwXnrW76mPRCnvmPVdkfNZ69OyBXRkAWVQ2.csv"
+            ]
         },
         {
             "id": 16,
@@ -60,7 +65,8 @@ fetch(url, {
             "description": "March Hare. The Hatter opened his eyes very wide on hearing this.",
             "status": "OPEN",
             "created_at": "2021-02-14 13:49:56",
-            "updated_at": "2021-02-14 13:49:56"
+            "updated_at": "2021-02-14 13:49:56",
+            "file_url": []
         },
         {
             "id": 29,
@@ -69,7 +75,8 @@ fetch(url, {
             "description": "Duchess. 'Everything's got a moral, if only you can have no answers.' 'If you please.",
             "status": "OPEN",
             "created_at": "2021-02-14 13:49:57",
-            "updated_at": "2021-02-14 13:49:57"
+            "updated_at": "2021-02-14 13:49:57",
+            "file_url": []
         },
         {
             "id": 71,
@@ -78,7 +85,8 @@ fetch(url, {
             "description": "Queen, 'and he shall tell you my.",
             "status": "CLOSE",
             "created_at": "2021-02-14 13:50:00",
-            "updated_at": "2021-02-14 13:50:00"
+            "updated_at": "2021-02-14 13:50:00",
+            "file_url": []
         },
         {
             "id": 96,
@@ -87,7 +95,8 @@ fetch(url, {
             "description": "Dormouse sulkily remarked, 'If you can't be civil, you'd better leave off,' said the youth, 'as I mentioned.",
             "status": "IN_PROGRESS",
             "created_at": "2021-02-14 13:50:02",
-            "updated_at": "2021-02-14 13:50:02"
+            "updated_at": "2021-02-14 13:50:02",
+            "file_url": []
         }
     ]
 }
@@ -152,7 +161,7 @@ curl -X POST \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"title":"qui","description":"porro","status":"veritatis"}'
+    -d '{"title":"quod","description":"aliquam","status":"aperiam","files":"molestiae"}'
 
 ```
 
@@ -168,9 +177,10 @@ let headers = {
 };
 
 let body = {
-    "title": "qui",
-    "description": "porro",
-    "status": "veritatis"
+    "title": "quod",
+    "description": "aliquam",
+    "status": "aperiam",
+    "files": "molestiae"
 }
 
 fetch(url, {
@@ -188,13 +198,18 @@ fetch(url, {
     "success": true,
     "message": "Task created successfully",
     "data": {
-        "title": "Sit",
-        "description": "I wonder what they said. The executioner's.",
-        "status": "OPEN",
-        "user_id": 20,
-        "updated_at": "2021-02-14 14:50:31",
-        "created_at": "2021-02-14 14:50:31",
-        "id": 101
+        "title": "veritatis",
+        "description": "qui",
+        "status": "open",
+        "user_id": 21,
+        "updated_at": "2021-05-16 11:46:55",
+        "created_at": "2021-05-16 11:46:55",
+        "id": 116,
+        "file_url": [
+            "http:\/\/laravel-api.test\/storage\/task-116\/XRoN2PApVqoYzgkqAeIyhUAIWW2kL2z8UDtPT1K1.png",
+            "http:\/\/laravel-api.test\/storage\/task-116\/Fbq2eRBCts2Z1UZ6SpxqV4OF9fccuRuVz6Zg2tST.png",
+            "http:\/\/laravel-api.test\/storage\/task-116\/i3stjCwXnrW76mPRCnvmPVdkfNZ69OyBXRkAWVQ2.csv"
+        ]
     }
 }
 ```
@@ -264,6 +279,11 @@ Description of the task</p>
 <input type="text" name="status" data-endpoint="POSTapi-v1-task" data-component="body" required  hidden>
 <br>
 Status of the task and the value must be one of <code>open</code>, <code>in_progress</code>, or <code>close</code>.</p>
+<p>
+<b><code>files</code></b>&nbsp;&nbsp;<small>array</small>     <i>optional</i> &nbsp;
+<input type="text" name="files" data-endpoint="POSTapi-v1-task" data-component="body"  hidden>
+<br>
+Files array to be upload</p>
 
 </form>
 
@@ -279,7 +299,7 @@ of the user
 
 ```bash
 curl -X GET \
-    -G "http://127.0.0.1:8000/api/v1/task/17" \
+    -G "http://127.0.0.1:8000/api/v1/task/2" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
@@ -287,7 +307,7 @@ curl -X GET \
 
 ```javascript
 const url = new URL(
-    "http://127.0.0.1:8000/api/v1/task/17"
+    "http://127.0.0.1:8000/api/v1/task/2"
 );
 
 let headers = {
@@ -317,7 +337,8 @@ fetch(url, {
         "description": "Dormouse sulkily remarked, 'If you can't be civil, you'd better leave off,' said the youth, 'as I mentioned.",
         "status": "IN_PROGRESS",
         "created_at": "2021-02-14 13:50:02",
-        "updated_at": "2021-02-14 13:50:02"
+        "updated_at": "2021-02-14 13:50:02",
+        "file_url": []
     }
 }
 ```
@@ -383,17 +404,17 @@ This API endpoint update the specific task details in storage.
 
 ```bash
 curl -X PUT \
-    "http://127.0.0.1:8000/api/v1/task/3" \
+    "http://127.0.0.1:8000/api/v1/task/1" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"title":"quis","description":"sit","status":"sint"}'
+    -d '{"title":"corporis","description":"facilis","status":"molestiae","files":"explicabo"}'
 
 ```
 
 ```javascript
 const url = new URL(
-    "http://127.0.0.1:8000/api/v1/task/3"
+    "http://127.0.0.1:8000/api/v1/task/1"
 );
 
 let headers = {
@@ -403,9 +424,10 @@ let headers = {
 };
 
 let body = {
-    "title": "quis",
-    "description": "sit",
-    "status": "sint"
+    "title": "corporis",
+    "description": "facilis",
+    "status": "molestiae",
+    "files": "explicabo"
 }
 
 fetch(url, {
@@ -508,6 +530,11 @@ Description of the task</p>
 <input type="text" name="status" data-endpoint="PUTapi-v1-task--task-" data-component="body" required  hidden>
 <br>
 Status of the task and the value must be one of <code>open</code>, <code>in_progress</code>, or <code>close</code>.</p>
+<p>
+<b><code>files</code></b>&nbsp;&nbsp;<small>array</small>     <i>optional</i> &nbsp;
+<input type="text" name="files" data-endpoint="PUTapi-v1-task--task-" data-component="body"  hidden>
+<br>
+Files array to be upload</p>
 
 </form>
 
@@ -522,7 +549,7 @@ This API endpoint delete the task
 
 ```bash
 curl -X DELETE \
-    "http://127.0.0.1:8000/api/v1/task/19" \
+    "http://127.0.0.1:8000/api/v1/task/20" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
@@ -530,7 +557,7 @@ curl -X DELETE \
 
 ```javascript
 const url = new URL(
-    "http://127.0.0.1:8000/api/v1/task/19"
+    "http://127.0.0.1:8000/api/v1/task/20"
 );
 
 let headers = {
